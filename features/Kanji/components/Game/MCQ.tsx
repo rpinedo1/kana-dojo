@@ -13,6 +13,7 @@ import { useShallow } from 'zustand/react/shallow';
 import Stars from '@/shared/ui-composite/Game/Stars';
 import AnswerSummary from '@/shared/ui-composite/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/ui-composite/audio/SSRAudioButton';
+import { getKanjiPromptAudio } from '@/features/Kanji/lib/readings';
 import FuriganaText from '@/shared/ui-composite/text/FuriganaText';
 import { useCrazyModeTrigger } from '@/features/CrazyMode/hooks/useCrazyModeTrigger';
 import { getGlobalAdaptiveSelector } from '@/shared/utils/adaptiveSelection';
@@ -219,6 +220,8 @@ const KanjiMCQ = ({ selectedKanjiObjs, isHidden }: KanjiMCQProps) => {
       ) as string[],
     );
     setWrongSelectedAnswers([]);
+    // Reshuffle only when the prompt changes, not when the option pool does.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correctChar, isReverse]);
 
   // A wrong answer keeps the current prompt on screen. Release the synchronous
@@ -359,6 +362,8 @@ const KanjiMCQ = ({ selectedKanjiObjs, isHidden }: KanjiMCQProps) => {
 
   const displayCharLang = isReverse ? undefined : 'ja';
 
+  const promptAudio = getKanjiPromptAudio(correctKanjiObj);
+
   return (
     <div
       className={clsx(
@@ -391,7 +396,8 @@ const KanjiMCQ = ({ selectedKanjiObjs, isHidden }: KanjiMCQProps) => {
             />
             {!isReverse && (
               <SSRAudioButton
-                text={correctChar}
+                text={promptAudio?.text ?? correctChar}
+                clipSrcs={promptAudio?.clipSrcs}
                 variant='icon-only'
                 size='sm'
                 className='bg-(--card-color) text-(--secondary-color)'
@@ -432,4 +438,3 @@ const KanjiMCQ = ({ selectedKanjiObjs, isHidden }: KanjiMCQProps) => {
 };
 
 export default KanjiMCQ;
-
