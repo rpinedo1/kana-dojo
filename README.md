@@ -74,6 +74,7 @@ All contributions are welcome! Whether you're fixing bugs, adding features, impr
 ## Key Features
 
 - **Three Training Dojos** — Kana (Hiragana/Katakana), Kanji (JLPT N5-N1), and Vocabulary
+- **Grammar Dojo** — Ten beginner lessons with explanations, pronunciation notes and tap-to-build sentence exercises
 - **Four Game Modes** — Pick, Reverse-Pick, Input, and Reverse-Input for varied practice
 - **100+ Themes** — Beautiful light and dark themes with 28 Japanese fonts
 - **Progress Tracking** — Statistics, streaks, and 80+ achievements

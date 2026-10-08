@@ -16,9 +16,14 @@ const Banner = () => {
   const isKanaRoute = pathWithoutLocale.startsWith('/kana');
   const isKanjiRoute = pathWithoutLocale.startsWith('/kanji');
   const isVocabRoute = pathWithoutLocale.startsWith('/vocabulary');
+  const isGrammarRoute = pathWithoutLocale.startsWith('/grammar');
   const isPreferencesRoute = pathWithoutLocale === '/preferences';
   const shouldShowBanner =
-    isKanaRoute || isKanjiRoute || isVocabRoute || isPreferencesRoute;
+    isKanaRoute ||
+    isKanjiRoute ||
+    isVocabRoute ||
+    isGrammarRoute ||
+    isPreferencesRoute;
 
   if (!shouldShowBanner) {
     return null;
@@ -30,9 +35,11 @@ const Banner = () => {
       ? 'Kanji 字'
       : isVocabRoute
         ? 'Vocabulary 語'
-        : isPreferencesRoute
-          ? 'Preferences'
-          : '';
+        : isGrammarRoute
+          ? 'Grammar 文'
+          : isPreferencesRoute
+            ? 'Preferences'
+            : '';
 
   return (
     <h2
@@ -46,14 +53,22 @@ const Banner = () => {
       {USE_NEW_BADGE_DESIGN ? (
         <>
           <span className={newBadgeClasses}>
-            {isPreferencesRoute ? <Sparkles size={22} /> : subheading.split(' ')[1]}
+            {isPreferencesRoute ? (
+              <Sparkles size={22} />
+            ) : (
+              subheading.split(' ')[1]
+            )}
           </span>
           <span>{subheading.split(' ')[0]}</span>
         </>
       ) : (
         <>
           <span className='flex items-center justify-center text-(--secondary-color)'>
-            {isPreferencesRoute ? <Sparkles size={28} /> : subheading.split(' ')[1]}
+            {isPreferencesRoute ? (
+              <Sparkles size={28} />
+            ) : (
+              subheading.split(' ')[1]
+            )}
           </span>
           <span>{subheading.split(' ')[0]}</span>
         </>
@@ -63,4 +78,3 @@ const Banner = () => {
 };
 
 export default Banner;
-

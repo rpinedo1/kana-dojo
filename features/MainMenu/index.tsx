@@ -90,6 +90,11 @@ const MainMenu = () => {
       name_ja: '字',
       href: '/kanji',
     },
+    {
+      name_en: 'Grammar',
+      name_ja: '文',
+      href: '/grammar',
+    },
 
     // {
     //   name_en: 'Sentences',
@@ -311,7 +316,9 @@ const MainMenu = () => {
                         ? '[animation-delay:0ms]'
                         : i === 1
                           ? '[animation-delay:800ms]'
-                          : '[animation-delay:1600ms]',
+                          : i === 2
+                            ? '[animation-delay:1600ms]'
+                            : '[animation-delay:2400ms]',
                     )}
                   >
                     {link.name_ja}

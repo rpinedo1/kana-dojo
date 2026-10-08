@@ -52,6 +52,7 @@ const Info = () => {
       '/kana/learn-katakana',
       '/kanji',
       '/vocabulary',
+      '/grammar',
       '/',
       '/sentences',
     ].includes(normalizedPath)
@@ -123,4 +124,3 @@ const Info = () => {
 };
 
 export default Info;
-

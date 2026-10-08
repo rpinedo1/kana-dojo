@@ -102,6 +102,22 @@ export default function translationGen(t: (key: string) => string) {
         </>
       ),
     },
+    '/grammar': {
+      header: <span>Welcome to the grammar dojo!</span>,
+      content: (
+        <>
+          <p className='text-lg text-(--secondary-color)'>
+            Learn how Japanese sentences fit together, one short lesson at a
+            time. Each lesson explains a pattern in plain English, then lets you
+            practise it by building real sentences.
+          </p>
+          <p className='text-lg text-(--secondary-color)'>
+            Start with Lesson 1, read the explanation, then try the guided
+            practice and the checkpoint. Missed concepts are saved for review.
+          </p>
+        </>
+      ),
+    },
 
     jlptMenu: {
       header: <span>About the JLPT kanji/vocabulary groups</span>,
@@ -163,4 +179,3 @@ export default function translationGen(t: (key: string) => string) {
 
   return info;
 }
-

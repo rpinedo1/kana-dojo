@@ -1,0 +1,267 @@
+import type { GrammarLesson } from '../../../types';
+import { s } from '../helpers';
+
+export const lesson02: GrammarLesson = {
+  id: 'noun-desu',
+  number: 2,
+  title: 'Noun sentences with です',
+  titleJa: '〜です',
+  summary: 'Say "X is Y" politely with は and です.',
+  conceptIds: ['desu-copula'],
+  prerequisites: ['sentence-order'],
+  explanation: [
+    'To say what something or someone is, put a noun before です. 学生です means "(I) am a student." です works like "is / am / are" and makes the sentence polite.',
+    'Add a topic with は to say who you are talking about: 私は 学生です ("I am a student"). The pattern is X は Y です: "As for X, it is Y."',
+    'です always comes at the end, just like a verb. Japanese has no words for "a" or "the", and no plural ending here: 学生です can mean "am a student" or "are students" depending on context.',
+  ],
+  pattern: {
+    formula: 'X は + Noun + です',
+    example: s(
+      '私[わたし]は 学生[がくせい]です。',
+      'Watashi wa gakusei desu.',
+      'I am a student.',
+      'wa-ta-shi wa ga-ku-see des(u)',
+      'polite',
+    ),
+  },
+  breakdown: [
+    {
+      part: '私[わたし]',
+      romaji: 'watashi',
+      role: 'Topic noun',
+      note: 'Who we are talking about.',
+    },
+    {
+      part: 'は',
+      romaji: 'wa',
+      role: 'Topic particle',
+      note: '"As for…". Said "wa".',
+    },
+    {
+      part: '学生[がくせい]',
+      romaji: 'gakusei',
+      role: 'Noun',
+      note: '"Student". What the topic is.',
+    },
+    {
+      part: 'です',
+      romaji: 'desu',
+      role: 'Polite copula',
+      note: '"Is / am / are". Closes the sentence politely.',
+    },
+  ],
+  examples: [
+    s(
+      '学生[がくせい]です。',
+      'Gakusei desu.',
+      '(I) am a student.',
+      'ga-ku-see des(u)',
+      'polite',
+    ),
+    s(
+      '田中[たなか]さんは 先生[せんせい]です。',
+      'Tanaka-san wa sensei desu.',
+      'Tanaka-san is a teacher.',
+      'ta-na-ka-san wa sen-see des(u)',
+      'polite',
+    ),
+    s(
+      '私[わたし]は 会社員[かいしゃいん]です。',
+      'Watashi wa kaishain desu.',
+      'I am an office worker.',
+      'wa-ta-shi wa ka-i-sha-in des(u)',
+      'polite',
+    ),
+    s(
+      '山田[やまだ]さんは 日本人[にほんじん]です。',
+      'Yamada-san wa nihonjin desu.',
+      'Yamada-san is Japanese.',
+      'ya-ma-da-san wa ni-hon-jin des(u)',
+      'polite',
+    ),
+  ],
+  pronunciationNotes: [
+    'です is usually said close to "des": the う is often devoiced (whispered) in standard Tokyo speech. It is not always silent—careful or emphatic speech may voice it, and it varies by speaker.',
+    '学生 is "ga-ku-see": the く is often whispered too, and せい sounds like a long "see".',
+    'さん after a name is a polite title. Never use it for yourself.',
+  ],
+  mnemonic:
+    'X は Y です: "X? → Y, (politely)." は opens the topic; です politely closes the sentence.',
+  commonMistakes: [
+    {
+      wrong: '私[わたし]は です 学生[がくせい]。',
+      right: '私[わたし]は 学生[がくせい]です。',
+      why: 'です goes after the noun, at the end—not in the middle like English "am".',
+    },
+    {
+      wrong: '私[わたし]は 学生[がくせい]ます。',
+      right: '私[わたし]は 学生[がくせい]です。',
+      why: '〜ます is a verb ending. After a noun, use です.',
+    },
+    {
+      wrong: '私[わたし]は 田中[たなか]さんです。',
+      right: '私[わたし]は 田中[たなか]です。',
+      why: 'さん is a title for other people. Do not use it for yourself.',
+    },
+  ],
+  register: [
+    {
+      polite: s(
+        '学生[がくせい]です。',
+        'Gakusei desu.',
+        "(I)'m a student.",
+        undefined,
+        'polite',
+      ),
+      casual: s(
+        '学生[がくせい]だ。',
+        'Gakusei da.',
+        "(I)'m a student.",
+        undefined,
+        'casual',
+      ),
+      note: 'Casual speech replaces です with だ, or drops it entirely (学生). A bare だ can sound blunt; friends often just say 学生 or 学生だよ.',
+    },
+  ],
+  vocabulary: [
+    { jp: '学生[がくせい]', romaji: 'gakusei', en: 'student' },
+    { jp: '先生[せんせい]', romaji: 'sensei', en: 'teacher' },
+    { jp: '会社員[かいしゃいん]', romaji: 'kaishain', en: 'office worker' },
+    { jp: '日本人[にほんじん]', romaji: 'nihonjin', en: 'Japanese person' },
+    { jp: '山田[やまだ]さん', romaji: 'Yamada-san', en: 'Mr./Ms. Yamada' },
+    { jp: 'です', romaji: 'desu', en: 'is / am / are (polite)' },
+  ],
+  practice: [
+    {
+      id: 'l02-p1',
+      type: 'meaning',
+      conceptId: 'desu-copula',
+      instruction: 'What does this sentence mean?',
+      sentence: s(
+        '田中[たなか]さんは 先生[せんせい]です。',
+        'Tanaka-san wa sensei desu.',
+        'Tanaka-san is a teacher.',
+      ),
+      options: [
+        { id: 'a', text: 'Tanaka-san is a student.' },
+        { id: 'b', text: 'I am a teacher.' },
+        { id: 'c', text: 'Tanaka-san is a teacher.' },
+        { id: 'd', text: "Tanaka-san's teacher." },
+      ],
+      correctOptionId: 'c',
+      hint: '先生 means "teacher". Who is the topic?',
+      explanation:
+        '田中さんは sets Tanaka-san as the topic; 先生です says "is a teacher".',
+    },
+    {
+      id: 'l02-p2',
+      type: 'build',
+      conceptId: 'desu-copula',
+      instruction: 'Build the sentence.',
+      prompt: 'I am a student.',
+      constraint: 'Use all tiles.',
+      tiles: ['私[わたし]', 'は', '学生[がくせい]', 'です'],
+      accepted: [['私[わたし]', 'は', '学生[がくせい]', 'です']],
+      sentence: s(
+        '私[わたし]は 学生[がくせい]です。',
+        'Watashi wa gakusei desu.',
+        'I am a student.',
+      ),
+      hint: 'X は Y です. です is last.',
+      explanation: 'Topic + は, then the noun, then です at the end.',
+    },
+    {
+      id: 'l02-p3',
+      type: 'error',
+      conceptId: 'desu-copula',
+      instruction: 'Tap the incorrect part, then choose the fix.',
+      parts: ['山田[やまだ]さん', 'は', '会社員[かいしゃいん]', 'ます'],
+      errorIndex: 3,
+      fixOptions: ['です', 'ます', 'は'],
+      acceptedFixes: ['です'],
+      sentence: s(
+        '山田[やまだ]さんは 会社員[かいしゃいん]です。',
+        'Yamada-san wa kaishain desu.',
+        'Yamada-san is an office worker.',
+      ),
+      hint: '会社員 is a noun, not a verb.',
+      explanation: 'A noun is followed by です. 〜ます is only for verbs.',
+    },
+  ],
+  checkpoint: [
+    {
+      id: 'l02-c1',
+      type: 'reverse',
+      conceptId: 'desu-copula',
+      instruction: 'Build the Japanese sentence.',
+      prompt: 'Yamada-san is Japanese.',
+      constraint: 'Build the polite version. Not every tile is needed.',
+      tiles: ['山田[やまだ]さん', 'は', '日本人[にほんじん]', 'です'],
+      distractors: ['学生[がくせい]', 'ます'],
+      accepted: [['山田[やまだ]さん', 'は', '日本人[にほんじん]', 'です']],
+      sentence: s(
+        '山田[やまだ]さんは 日本人[にほんじん]です。',
+        'Yamada-san wa nihonjin desu.',
+        'Yamada-san is Japanese.',
+      ),
+      explanation:
+        'X は Y です: 山田さん is the topic, 日本人 is what they are, and です closes the sentence politely.',
+    },
+    {
+      id: 'l02-c2',
+      type: 'meaning',
+      conceptId: 'desu-copula',
+      instruction: 'You are introducing yourself. What does this mean?',
+      sentence: s(
+        '会社員[かいしゃいん]です。',
+        'Kaishain desu.',
+        "(I)'m an office worker.",
+      ),
+      options: [
+        { id: 'a', text: "I'm an office worker." },
+        { id: 'b', text: "I'm a teacher." },
+        { id: 'c', text: 'The company is here.' },
+        { id: 'd', text: 'Are you an office worker?' },
+      ],
+      correctOptionId: 'a',
+      explanation:
+        'The topic (you) is omitted because it is clear. 会社員です = "am an office worker".',
+    },
+    {
+      id: 'l02-c3',
+      type: 'build',
+      conceptId: 'desu-copula',
+      instruction: 'Build the sentence.',
+      prompt: 'Tanaka-san is a teacher.',
+      constraint: 'Use all tiles.',
+      tiles: ['田中[たなか]さん', 'は', '先生[せんせい]', 'です'],
+      accepted: [['田中[たなか]さん', 'は', '先生[せんせい]', 'です']],
+      sentence: s(
+        '田中[たなか]さんは 先生[せんせい]です。',
+        'Tanaka-san wa sensei desu.',
+        'Tanaka-san is a teacher.',
+      ),
+      explanation: 'Topic は, noun, です.',
+    },
+    {
+      id: 'l02-c4',
+      type: 'error',
+      conceptId: 'topic-wa',
+      instruction:
+        'Tap the part with the spelling mistake, then choose the fix.',
+      parts: ['私[わたし]', 'わ', '学生[がくせい]', 'です'],
+      errorIndex: 1,
+      fixOptions: ['は', 'ま', 'わ'],
+      acceptedFixes: ['は'],
+      sentence: s(
+        '私[わたし]は 学生[がくせい]です。',
+        'Watashi wa gakusei desu.',
+        'I am a student.',
+      ),
+      explanation:
+        'The topic particle is written は even though it is said "wa".',
+    },
+  ],
+  references: ['tae-kim', 'makino-tsutsui', 'tufs-devoicing'],
+  alignment: { jlpt: 'N5', tags: ['copula'] },
+};

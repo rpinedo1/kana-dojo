@@ -741,6 +741,12 @@ export interface MetadataTranslations {
     description: string;
     keywords: string;
   };
+  grammar: {
+    title: string;
+    titleShort: string;
+    description: string;
+    keywords: string;
+  };
   vocabularyJlptN5: {
     title: string;
     titleShort: string;
@@ -1772,6 +1778,142 @@ export interface ResourcesTranslations {
   };
 }
 
+export interface GrammarTranslations {
+  dojo: {
+    title: string;
+    courseLevel: string;
+    lessonsCompleted: string;
+    conceptsMastered: string;
+    toReview: string;
+    continue: string;
+    startCourse: string;
+    allComplete: string;
+    lessons: string;
+    lessonNumber: string;
+    recommendedAfter: string;
+    bestScore: string;
+    conceptProgress: string;
+    conceptProgressHint: string;
+    accuracy: string;
+    notPracticed: string;
+    resetProgress: string;
+    resetConfirm: string;
+    localNotice: string;
+  };
+  status: {
+    notStarted: string;
+    inProgress: string;
+    completed: string;
+    new: string;
+    learning: string;
+    review: string;
+    mastered: string;
+  };
+  settings: {
+    romaji: string;
+    furigana: string;
+    romajiHint: string;
+    furiganaHint: string;
+  };
+  review: {
+    title: string;
+    queueCount: string;
+    start: string;
+    empty: string;
+    clearRule: string;
+    backToDojo: string;
+    missedIn: string;
+    revisit: string;
+  };
+  lesson: {
+    back: string;
+    learn: string;
+    practice: string;
+    checkpoint: string;
+    explanation: string;
+    pattern: string;
+    breakdown: string;
+    examples: string;
+    pronunciation: string;
+    pronunciationGuide: string;
+    pronunciationLegend: string;
+    mnemonic: string;
+    mistakes: string;
+    incorrect: string;
+    correct: string;
+    unnatural: string;
+    moreNatural: string;
+    register: string;
+    dialogues: string;
+    vocabulary: string;
+    simplified: string;
+    startPractice: string;
+    startCheckpoint: string;
+    practiceIntro: string;
+    checkpointIntro: string;
+    polite: string;
+    casual: string;
+    notFound: string;
+  };
+  exercise: {
+    progress: string;
+    types: {
+      meaning: string;
+      particle: string;
+      build: string;
+      reverse: string;
+      error: string;
+    };
+    check: string;
+    continue: string;
+    tryAgain: string;
+    showHint: string;
+    hint: string;
+    reset: string;
+    yourSentence: string;
+    tileBank: string;
+    emptyAnswer: string;
+    addTile: string;
+    removeTile: string;
+    sentenceNow: string;
+    sentenceEmpty: string;
+    blank: string;
+    context: string;
+    stepFindError: string;
+    stepChooseFix: string;
+    correct: string;
+    incorrect: string;
+    yourAnswer: string;
+    correctAnswer: string;
+    alsoAccepted: string;
+    rule: string;
+    revisitLesson: string;
+    feedback: {
+      usedDistractor: string;
+      missingTiles: string;
+      order: string;
+      empty: string;
+      wrongPart: string;
+      wrongFix: string;
+    };
+  };
+  summary: {
+    practiceDone: string;
+    checkpointPassed: string;
+    checkpointFailed: string;
+    reviewDone: string;
+    score: string;
+    passMark: string;
+    addedToReview: string;
+    allCorrect: string;
+    retry: string;
+    reread: string;
+    nextLesson: string;
+    backToLessons: string;
+    goToCheckpoint: string;
+  };
+}
+
 /**
  * Complete translation structure with all namespaces
  */
@@ -1797,6 +1939,7 @@ export interface Translations {
   kanaChart: KanaChartTranslations;
   conjugator: ConjugatorTranslations;
   resources: ResourcesTranslations;
+  grammar: GrammarTranslations;
 }
 
 /**
@@ -1824,7 +1967,8 @@ export type TranslationKey =
   | `legal.${keyof LegalTranslations}`
   | `kanaChart.${keyof KanaChartTranslations}`
   | `conjugator.${keyof ConjugatorTranslations}`
-  | `resources.${keyof ResourcesTranslations}`;
+  | `resources.${keyof ResourcesTranslations}`
+  | `grammar.${keyof GrammarTranslations}`;
 
 /**
  * Available namespaces
@@ -1850,7 +1994,8 @@ export type Namespace =
   | 'legal'
   | 'kanaChart'
   | 'conjugator'
-  | 'resources';
+  | 'resources'
+  | 'grammar';
 
 /**
  * Available languages
