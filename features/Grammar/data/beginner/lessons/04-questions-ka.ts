@@ -101,7 +101,8 @@ export const lesson04: GrammarLesson = {
     {
       wrong: 'どこですか トイレは。',
       right: 'トイレは どこですか。',
-      why: 'Putting the topic after the question happens in casual speech, but the standard polite form keeps です + か at the end.',
+      why: 'Putting the topic after the question happens in casual speech, but in polite speech it sounds off. The standard polite form keeps です + か at the end.',
+      kind: 'unnatural',
     },
     {
       wrong: 'これは なにですか。',

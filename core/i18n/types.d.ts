@@ -1839,6 +1839,10 @@ export interface GrammarTranslations {
     pronunciationLegend: string;
     mnemonic: string;
     mistakes: string;
+    incorrect: string;
+    correct: string;
+    unnatural: string;
+    moreNatural: string;
     register: string;
     dialogues: string;
     vocabulary: string;

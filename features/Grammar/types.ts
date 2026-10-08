@@ -50,6 +50,11 @@ export interface CommonMistake {
   wrong: RubyText;
   right: RubyText;
   why: string;
+  /**
+   * 'error' (default): ungrammatical or wrong. 'unnatural': grammatical but
+   * sounds off; shown with a softer marker instead of a cross.
+   */
+  kind?: 'error' | 'unnatural';
 }
 
 export interface RegisterPair {

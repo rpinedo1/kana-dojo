@@ -26,10 +26,16 @@ const RubyText = ({
   const withFurigana = showFurigana ?? furiganaSetting;
 
   return (
-    <span lang='ja' className={cn('leading-[1.9]', className)}>
+    <span
+      lang='ja'
+      // Break only at the authored word spaces, not inside words.
+      className={cn('leading-[1.9] [word-break:keep-all]', className)}
+    >
       {parseRuby(text).map((segment, index) =>
         segment.reading && withFurigana ? (
-          <ruby key={index}>
+          // ruby-align: center keeps readings (and wide-reading bases) compact
+          // instead of spreading the characters apart (Chrome 128+, Safari 18.2+).
+          <ruby key={index} className='[ruby-align:center]'>
             {segment.text}
             <rp>(</rp>
             <rt className={cn('text-[0.5em] font-normal', rtClassName)}>

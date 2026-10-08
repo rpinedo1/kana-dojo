@@ -74,6 +74,7 @@ export const lesson01: GrammarLesson = {
     'The topic particle は is written with the kana for "ha" but always said "wa". Inside ordinary words, は keeps its "ha" sound.',
     'The final す in 〜ます is often whispered or very short in standard Tokyo speech, so 行きます can sound like "ikimas". It is not always fully silent—some speakers and careful speech voice it.',
     'Japanese syllables get roughly equal length: a-shi-ta, not "ASH-ta".',
+    'The small readings (furigana) appear only above kanji. In 行きます, い is the reading of 行; きます is already written in hiragana, so it needs no reading. Together: い + きます = いきます (ikimasu).',
   ],
   mnemonic:
     'Think of the verb as the full stop of a Japanese sentence: nothing comes after it except a small ending.',
@@ -91,7 +92,8 @@ export const lesson01: GrammarLesson = {
     {
       wrong: '私[わたし]は 行[い]きます。私[わたし]は 食[た]べます。',
       right: '私[わたし]は 行[い]きます。食[た]べます。',
-      why: 'Not wrong, but repeating 私は in every sentence sounds unnatural. Once the topic is clear, drop it.',
+      why: 'Grammatical, but repeating 私は in every sentence sounds unnatural. Once the topic is clear, drop it.',
+      kind: 'unnatural',
     },
   ],
   register: [

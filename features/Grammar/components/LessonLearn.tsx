@@ -2,7 +2,13 @@
 
 import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
-import { Check, X, Lightbulb, Info as InfoIcon } from 'lucide-react';
+import {
+  Check,
+  X,
+  Lightbulb,
+  Info as InfoIcon,
+  TriangleAlert,
+} from 'lucide-react';
 import { useGrammarStore } from '../store/useGrammarStore';
 import type { GrammarLesson } from '../types';
 import RubyText from './RubyText';
@@ -157,28 +163,50 @@ const LessonLearn = ({ lesson }: { lesson: GrammarLesson }) => {
 
       <Section title={t('mistakes')}>
         <ul className='flex flex-col gap-2'>
-          {lesson.commonMistakes.map(mistake => (
-            <li
-              key={mistake.wrong}
-              className='flex flex-col gap-2 rounded-2xl bg-(--card-color) p-4'
-            >
-              <span className='flex items-center gap-2 text-(--secondary-color)'>
-                <X aria-label='incorrect' className='h-5 w-5 shrink-0' />
-                <RubyText
-                  text={mistake.wrong}
-                  className='text-xl line-through decoration-1'
-                />
-              </span>
-              <span className='flex items-center gap-2'>
-                <Check
-                  aria-label='correct'
-                  className='h-5 w-5 shrink-0 text-(--main-color)'
-                />
-                <RubyText text={mistake.right} className='text-xl' />
-              </span>
-              <p className='text-(--secondary-color)'>{mistake.why}</p>
-            </li>
-          ))}
+          {lesson.commonMistakes.map(mistake => {
+            const unnatural = mistake.kind === 'unnatural';
+            return (
+              <li
+                key={mistake.wrong}
+                className='flex flex-col gap-2 rounded-2xl bg-(--card-color) p-4'
+              >
+                {unnatural && (
+                  <span className='w-fit rounded-lg border border-(--border-color) px-2 py-0.5 text-xs text-(--secondary-color) uppercase'>
+                    {t('unnatural')}
+                  </span>
+                )}
+                <span className='flex items-center gap-2 text-(--secondary-color)'>
+                  {unnatural ? (
+                    <TriangleAlert
+                      aria-label={t('unnatural')}
+                      className='h-5 w-5 shrink-0'
+                    />
+                  ) : (
+                    <X
+                      aria-label={t('incorrect')}
+                      className='h-5 w-5 shrink-0'
+                    />
+                  )}
+                  <RubyText
+                    text={mistake.wrong}
+                    className={
+                      unnatural
+                        ? 'text-xl'
+                        : 'text-xl line-through decoration-1'
+                    }
+                  />
+                </span>
+                <span className='flex items-center gap-2'>
+                  <Check
+                    aria-label={unnatural ? t('moreNatural') : t('correct')}
+                    className='h-5 w-5 shrink-0 text-(--main-color)'
+                  />
+                  <RubyText text={mistake.right} className='text-xl' />
+                </span>
+                <p className='text-(--secondary-color)'>{mistake.why}</p>
+              </li>
+            );
+          })}
         </ul>
       </Section>
 
