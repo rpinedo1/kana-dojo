@@ -12,6 +12,7 @@ import {
 import { useGrammarStore } from '../store/useGrammarStore';
 import type { GrammarLesson } from '../types';
 import RubyText from './RubyText';
+import SpeakButton from './SpeakButton';
 import SentenceCard from './SentenceCard';
 
 const Section = ({
@@ -236,7 +237,10 @@ const LessonLearn = ({ lesson }: { lesson: GrammarLesson }) => {
               key={word.jp}
               className='flex flex-col rounded-2xl bg-(--card-color) px-4 py-3'
             >
-              <RubyText text={word.jp} className='text-xl' />
+              <div className='flex items-center gap-2'>
+                <RubyText text={word.jp} className='text-xl' />
+                <SpeakButton jp={word.jp} />
+              </div>
               {showRomaji && (
                 <span className='text-sm text-(--secondary-color) italic'>
                   {word.romaji}

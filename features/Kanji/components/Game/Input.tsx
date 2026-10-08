@@ -4,13 +4,18 @@ import { CircleCheck } from 'lucide-react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import type { IKanjiObj } from '@/features/Kanji/store/useKanjiStore';
-import { useClick, useCorrect, useError } from '@/shared/hooks/generic/useAudio';
+import {
+  useClick,
+  useCorrect,
+  useError,
+} from '@/shared/hooks/generic/useAudio';
 // import GameIntel from '@/shared/ui-composite/Game/GameIntel';
 import { useStatsStore } from '@/features/Progress';
 import { useShallow } from 'zustand/react/shallow';
 import Stars from '@/shared/ui-composite/Game/Stars';
 import AnswerSummary from '@/shared/ui-composite/Game/AnswerSummary';
 import SSRAudioButton from '@/shared/ui-composite/audio/SSRAudioButton';
+import { getKanjiPromptAudio } from '@/features/Kanji/lib/readings';
 import FuriganaText from '@/shared/ui-composite/text/FuriganaText';
 import { useCrazyModeTrigger } from '@/features/CrazyMode/hooks/useCrazyModeTrigger';
 import { getGlobalAdaptiveSelector } from '@/shared/utils/adaptiveSelection';
@@ -126,13 +131,17 @@ const KanjiInputGame = ({
   const [promptSequence, setPromptSequence] = useState(0);
   const pauseTimer = () => {
     if (answerStartTimeRef.current !== null) {
-      elapsedTimeMsRef.current += performance.now() - answerStartTimeRef.current;
+      elapsedTimeMsRef.current +=
+        performance.now() - answerStartTimeRef.current;
       answerStartTimeRef.current = null;
     }
   };
   const getElapsedTimeMs = () => {
     if (answerStartTimeRef.current !== null) {
-      return elapsedTimeMsRef.current + (performance.now() - answerStartTimeRef.current);
+      return (
+        elapsedTimeMsRef.current +
+        (performance.now() - answerStartTimeRef.current)
+      );
     }
     return elapsedTimeMsRef.current;
   };
@@ -161,10 +170,7 @@ const KanjiInputGame = ({
       const isSpace = event.code === 'Space' || event.key === ' ';
       const isContinueShortcut = isEnter || isSpace;
 
-      if (
-        isContinueShortcut &&
-        shouldSuppressContinueKeyboardShortcut()
-      ) {
+      if (isContinueShortcut && shouldSuppressContinueKeyboardShortcut()) {
         event.preventDefault();
         return;
       }
@@ -365,6 +371,8 @@ const KanjiInputGame = ({
       ? targetChar[0]
       : targetChar;
 
+  const promptAudio = getKanjiPromptAudio(correctKanjiObj);
+
   return (
     <div
       className={clsx(
@@ -415,7 +423,8 @@ const KanjiInputGame = ({
               />
               {!isReverse && (
                 <SSRAudioButton
-                  text={correctChar}
+                  text={promptAudio?.text ?? correctChar}
+                  clipSrcs={promptAudio?.clipSrcs}
                   variant='icon-only'
                   size='sm'
                   className='bg-(--card-color) text-(--secondary-color)'
@@ -478,4 +487,3 @@ const KanjiInputGame = ({
 };
 
 export default KanjiInputGame;
-

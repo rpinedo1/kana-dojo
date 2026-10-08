@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/utils/utils';
 import RubyText from './RubyText';
+import SpeakButton from './SpeakButton';
 import { useGrammarStore } from '../store/useGrammarStore';
 import type { GrammarSentence } from '../types';
 
@@ -52,6 +53,7 @@ const SentenceCard = ({
             size === 'lg' ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'
           }
         />
+        <SpeakButton jp={sentence.jp} />
         {sentence.register && <RegisterBadge register={sentence.register} />}
       </div>
       {showRomaji && (

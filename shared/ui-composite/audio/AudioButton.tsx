@@ -1,5 +1,5 @@
 'use client';
-import { useJapaneseTTS } from '@/features/Preferences/hooks/useJapaneseTTS';
+import { usePronunciation } from '@/features/Preferences/hooks/usePronunciation';
 import { Volume2, Loader2 } from 'lucide-react';
 import { useCallback, useEffect, useRef } from 'react';
 import clsx from 'clsx';
@@ -8,6 +8,8 @@ import { useAudioPreferences } from '@/features/Preferences';
 
 interface AudioButtonProps {
   text: string;
+  /** Pre-recorded clips to play instead of the browser voice */
+  clipSrcs?: string[] | null;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'default' | 'minimal' | 'icon-only';
@@ -20,6 +22,7 @@ interface AudioButtonProps {
 
 const AudioButton: React.FC<AudioButtonProps> = ({
   text,
+  clipSrcs,
   className,
   size = 'md',
   variant = 'default',
@@ -29,42 +32,14 @@ const AudioButton: React.FC<AudioButtonProps> = ({
   autoPlay = false,
   autoPlayTrigger,
 }) => {
-  const { speak, stop, isPlaying, isSupported, refreshVoices } =
-    useJapaneseTTS();
+  const { play, stop, isPlaying, isSupported } = usePronunciation();
 
-  // Get pronunciation settings from theme store
-  const {
-    pronunciationEnabled,
-    pronunciationSpeed,
-    pronunciationPitch,
-    pronunciationAutoPlay,
-  } = useAudioPreferences();
+  const { pronunciationEnabled, pronunciationAutoPlay } = useAudioPreferences();
 
   const playPronunciation = useCallback(async () => {
     onPlay?.();
-
-    // Refresh voices before speaking
-    if (typeof window !== 'undefined') {
-      refreshVoices();
-      // Firefox needs longer delay to ensure voices are loaded
-      const isFirefox = /Firefox/i.test(navigator.userAgent);
-      const delay = isFirefox ? 300 : 100;
-      await new Promise(resolve => setTimeout(resolve, delay));
-    }
-
-    await speak(text, {
-      rate: pronunciationSpeed,
-      pitch: pronunciationPitch,
-      volume: 0.8,
-    });
-  }, [
-    onPlay,
-    pronunciationPitch,
-    pronunciationSpeed,
-    refreshVoices,
-    speak,
-    text,
-  ]);
+    await play(text, clipSrcs);
+  }, [clipSrcs, onPlay, play, text]);
 
   const handleClick = useCallback(async () => {
     if (disabled || !pronunciationEnabled) return;
@@ -94,7 +69,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
     if (
       !autoPlay ||
       !pronunciationAutoPlay ||
-      !isSupported ||
+      (!isSupported && !clipSrcs?.length) ||
       hasAutoPlayedRef.current
     ) {
       return;
@@ -114,6 +89,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({
   }, [
     autoPlay,
     autoPlayTrigger,
+    clipSrcs,
     disabled,
     isPlaying,
     isSupported,
@@ -231,4 +207,3 @@ const AudioButton: React.FC<AudioButtonProps> = ({
 };
 
 export default AudioButton;
-

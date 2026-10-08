@@ -16,6 +16,7 @@ export { default as KanaCards } from './components/KanaCards';
 export { default as KanaBlitz } from './components/Blitz';
 export { default as KanaGauntlet } from './components/Gauntlet';
 export { default as SubsetDictionary } from './components/SubsetDictionary';
+export { default as KanaSoundButton } from './components/KanaSoundButton';
 
 // Types (read-only data types)
 export type { KanaCharacter, KanaGroup } from '@/entities/kana';

@@ -3,12 +3,21 @@
 import clsx from 'clsx';
 import { toKana, toRomaji } from 'wanakana';
 import { IWord } from '@/shared/types/interfaces';
-import { cardBorderStyles } from '@/shared/utils/styles';
-import { useAudioPreferences, useThemePreferences } from '@/features/Preferences';
+import {
+  useAudioPreferences,
+  useThemePreferences,
+} from '@/features/Preferences';
 import { useJapaneseTTS } from '@/features/Preferences/hooks/useJapaneseTTS';
 import FuriganaText from '@/shared/ui-composite/text/FuriganaText';
+import PitchAccent from '@/features/Vocabulary/components/PitchAccent';
+import { pitchKey } from '@/features/Vocabulary/lib/pitchAccent';
+import {
+  getCachedPitchAccents,
+  getPitchAccents,
+  type PitchAccents,
+} from '@/features/Vocabulary/services/pitchService';
 import { Volume2 } from 'lucide-react';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 
 type SetDictionaryProps = {
   words: IWord[];
@@ -24,6 +33,20 @@ const SetDictionary = memo(function SetDictionary({
   const [activePronunciationText, setActivePronunciationText] = useState<
     string | null
   >(null);
+  const [pitchAccents, setPitchAccents] = useState<PitchAccents | null>(
+    getCachedPitchAccents,
+  );
+
+  useEffect(() => {
+    if (pitchAccents) return;
+    let cancelled = false;
+    void getPitchAccents().then(data => {
+      if (!cancelled) setPitchAccents(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [pitchAccents]);
 
   const playReadingPronunciation = useCallback(
     async (reading: string) => {
@@ -76,6 +99,10 @@ const SetDictionary = memo(function SetDictionary({
         const displayReading = showKana
           ? toKana(baseReading)
           : toRomaji(baseReading);
+        // Most words have one pattern; show at most the two most common.
+        const downsteps = (
+          pitchAccents?.[pitchKey(wordObj.word, rawReading)] ?? []
+        ).slice(0, 2);
 
         return (
           <div
@@ -132,6 +159,15 @@ const SetDictionary = memo(function SetDictionary({
                   <Volume2 size={15} className='fill-current' />
                 </span>
               </button>
+              {downsteps.map(downstep => (
+                <PitchAccent
+                  key={downstep}
+                  kana={toKana(baseReading)}
+                  downstep={downstep}
+                  showKana={showKana}
+                  className='text-lg text-(--secondary-color)'
+                />
+              ))}
               <p className='text-xl text-(--secondary-color) md:text-2xl'>
                 {wordObj.meanings.join(', ')}
               </p>
@@ -144,4 +180,3 @@ const SetDictionary = memo(function SetDictionary({
 });
 
 export default SetDictionary;
-

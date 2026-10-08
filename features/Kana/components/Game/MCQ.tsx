@@ -17,6 +17,7 @@ import { useSmartReverseMode } from '@/shared/hooks/game/useSmartReverseMode';
 import { useAdaptiveOptionCount } from '@/shared/hooks/game/useAdaptiveOptionCount';
 import useClassicSessionStore from '@/shared/store/useClassicSessionStore';
 import { getUniqueIncorrectOptions } from '@/features/Kana/lib/getUniqueIncorrectOptions';
+import { useKanaAnswerAudio } from '@/features/Kana/hooks/useKanaAnswerAudio';
 
 const random = new Random();
 
@@ -126,6 +127,7 @@ const KanaMCQ = ({ isHidden }: KanaMCQProps) => {
   );
 
   const { playCorrect } = useCorrect();
+  const playAnswerAudio = useKanaAnswerAudio();
   const { playErrorTwice } = useError();
   const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
@@ -162,9 +164,7 @@ const KanaMCQ = ({ isHidden }: KanaMCQProps) => {
   const selectedPairs2 = useMemo<Record<string, string>>(
     () =>
       Object.fromEntries(
-        selectedRomaji
-          .map((key, i) => [key, selectedKana[i] ?? ''])
-          .reverse(),
+        selectedRomaji.map((key, i) => [key, selectedKana[i] ?? '']).reverse(),
       ),
     [selectedRomaji, selectedKana],
   );
@@ -214,9 +214,7 @@ const KanaMCQ = ({ isHidden }: KanaMCQProps) => {
         void _;
         return getUniqueIncorrectOptions(
           correctRomajiChar,
-          Object.values(incorrectPairs).sort(
-            () => random.real(0, 1) - 0.5,
-          ),
+          Object.values(incorrectPairs).sort(() => random.real(0, 1) - 0.5),
           incorrectCount,
         );
       } else {
@@ -225,9 +223,7 @@ const KanaMCQ = ({ isHidden }: KanaMCQProps) => {
         void _;
         return getUniqueIncorrectOptions(
           correctKanaCharReverse,
-          Object.values(incorrectPairs).sort(
-            () => random.real(0, 1) - 0.5,
-          ),
+          Object.values(incorrectPairs).sort(() => random.real(0, 1) - 0.5),
           incorrectCount,
         );
       }
@@ -435,6 +431,7 @@ const KanaMCQ = ({ isHidden }: KanaMCQProps) => {
         // Normal pick mode logic
         if (selectedChar === correctRomajiChar) {
           handleCorrectAnswer(correctKanaChar);
+          playAnswerAudio([correctKanaChar]);
           // Use weighted selection - prioritizes characters user struggles with
           const newKana = adaptiveSelector.selectWeightedCharacter(
             selectedKana,
@@ -452,6 +449,7 @@ const KanaMCQ = ({ isHidden }: KanaMCQProps) => {
           reversedPairs2[selectedChar] === correctRomajiCharReverse
         ) {
           handleCorrectAnswer(correctRomajiCharReverse);
+          playAnswerAudio([selectedChar]);
           // Use weighted selection - prioritizes characters user struggles with
           const newRomaji = adaptiveSelector.selectWeightedCharacter(
             selectedRomaji,
@@ -468,6 +466,7 @@ const KanaMCQ = ({ isHidden }: KanaMCQProps) => {
       isReverse,
       correctRomajiChar,
       handleCorrectAnswer,
+      playAnswerAudio,
       correctKanaChar,
       selectedKana,
       handleWrongAnswer,
