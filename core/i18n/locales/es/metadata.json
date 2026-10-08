@@ -90,6 +90,12 @@
     "description": "Expand your Japanese vocabulary with words organized by JLPT levels. Interactive exercises, example sentences, and progress tracking.",
     "keywords": "japanese vocabulary, learn japanese words, JLPT vocabulary, vocabulary practice"
   },
+  "grammar": {
+    "title": "Dojo de Gramática - Aprende la estructura de las oraciones japonesas paso a paso",
+    "titleShort": "Dojo de Gramática - Construye oraciones en japonés",
+    "description": "Aprende cómo funcionan las oraciones japonesas con lecciones breves de gramática para principiantes: orden de palabras, です, は y が, partículas, preguntas, tiempos y adjetivos, con ejercicios para construir oraciones.",
+    "keywords": "gramática japonesa, partículas japonesas, wa y ga, estructura de oraciones en japonés, gramática japonesa para principiantes, gramática jlpt n5"
+  },
   "vocabularyJlptN5": {
     "title": "JLPT N5 Vocabulario - Lista y Práctica | KanaDojo",
     "titleShort": "JLPT N5 Vocabulario",

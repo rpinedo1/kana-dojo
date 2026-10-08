@@ -64,6 +64,7 @@ const mainNavItems: NavItem[] = [
   { href: '/kana', label: 'Kana', charIcon: 'あ' },
   { href: '/vocabulary', label: ' Vocabulary', charIcon: '語' },
   { href: '/kanji', label: ' Kanji', charIcon: '字' },
+  { href: '/grammar', label: ' Grammar', charIcon: '文' },
   {
     href: '/preferences',
     label: 'Preferences',
@@ -560,9 +561,9 @@ const Sidebar = () => {
   }, [hotkeysOn, router]);
 
   const isActive = (href: string) => {
-    if (href === '/kana') {
+    if (href === '/kana' || href === '/grammar') {
       return (
-        pathWithoutLocale === href || pathWithoutLocale.startsWith('/kana/')
+        pathWithoutLocale === href || pathWithoutLocale.startsWith(`${href}/`)
       );
     }
 

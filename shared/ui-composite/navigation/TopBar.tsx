@@ -96,6 +96,7 @@ export default function TopBar() {
     { name: 'Kana', href: '/kana', charIcon: 'あ' },
     { name: 'Kanji', href: '/kanji', charIcon: '字' },
     { name: 'Vocab', href: '/vocabulary', charIcon: '語' },
+    { name: 'Grammar', href: '/grammar', charIcon: '文' },
     { name: 'Preferences', href: '/preferences', icon: Sparkles },
   ];
 
@@ -105,13 +106,14 @@ export default function TopBar() {
     { name: 'Kana', href: '/kana', charIcon: 'あ' },
     { name: 'Vocab', href: '/vocabulary', charIcon: '語' },
     { name: 'Kanji', href: '/kanji', charIcon: '字' },
+    { name: 'Grammar', href: '/grammar', charIcon: '文' },
     { name: 'Preferences', href: '/preferences', icon: Sparkles },
   ];
 
   const isActive = (href: string) => {
-    if (href === '/kana') {
+    if (href === '/kana' || href === '/grammar') {
       return (
-        pathWithoutLocale === href || pathWithoutLocale.startsWith('/kana/')
+        pathWithoutLocale === href || pathWithoutLocale.startsWith(`${href}/`)
       );
     }
     return pathWithoutLocale === href;
@@ -259,4 +261,3 @@ export default function TopBar() {
     </>
   );
 }
-
