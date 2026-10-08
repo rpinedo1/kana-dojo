@@ -1,8 +1,13 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { useAudioPreferences } from '@/features/Preferences';
+
+// Speech and Audio APIs only exist in the browser, so skip server rendering.
+const AudioButton = dynamic(() => import('./AudioButton'), { ssr: false });
 
 interface SSRAudioButtonProps {
   text: string;
+  clipSrcs?: string[] | null;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'default' | 'minimal' | 'icon-only';
@@ -13,15 +18,14 @@ interface SSRAudioButtonProps {
   autoPlayTrigger?: string | number;
 }
 
-const SSRAudioButton: React.FC<SSRAudioButtonProps> = _props => {
+const SSRAudioButton: React.FC<SSRAudioButtonProps> = props => {
   const { pronunciationEnabled } = useAudioPreferences();
 
   if (!pronunciationEnabled) {
     return null;
   }
 
-  // TODO: Re-enable by rendering AudioButton once pronunciation UX is finalized.
-  return null;
+  return <AudioButton {...props} />;
 };
 
 export default SSRAudioButton;

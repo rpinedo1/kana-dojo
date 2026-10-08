@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { KanaSoundButton } from '@/features/Kana';
 
 const hiraganaData = {
   basic: [
@@ -13,7 +14,7 @@ const hiraganaData = {
     ['や', '', 'ゆ', '', 'よ'],
     ['ら', 'り', 'る', 'れ', 'ろ'],
     ['わ', '', '', '', 'を'],
-    ['n', '', '', '', ''],
+    ['ん', '', '', '', ''],
   ],
   romanji: [
     ['a', 'i', 'u', 'e', 'o'],
@@ -26,7 +27,7 @@ const hiraganaData = {
     ['ya', '', 'yu', '', 'yo'],
     ['ra', 'ri', 'ru', 're', 'ro'],
     ['wa', '', '', '', 'wo'],
-    ['ん', '', '', '', ''],
+    ['n', '', '', '', ''],
   ],
 };
 
@@ -42,7 +43,7 @@ const katakanaData = {
     ['ヤ', '', 'ユ', '', 'ヨ'],
     ['ラ', 'リ', 'ル', 'レ', 'ロ'],
     ['ワ', '', '', '', 'ヲ'],
-    ['n', '', '', '', ''],
+    ['ン', '', '', '', ''],
   ],
   romanji: [
     ['a', 'i', 'u', 'e', 'o'],
@@ -55,7 +56,7 @@ const katakanaData = {
     ['ya', '', 'yu', '', 'yo'],
     ['ra', 'ri', 'ru', 're', 'ro'],
     ['wa', '', '', '', 'wo'],
-    ['ン', '', '', '', ''],
+    ['n', '', '', '', ''],
   ],
 };
 
@@ -124,9 +125,10 @@ export default function KanaChartDisplay() {
                   >
                     {char ? (
                       <div>
-                        <div className='text-3xl font-bold text-(--main-color)'>
-                          {char}
-                        </div>
+                        <KanaSoundButton
+                          char={char}
+                          className='text-3xl font-bold text-(--main-color)'
+                        />
                         <div className='mt-1 text-sm text-(--secondary-color)'>
                           {currentData.romanji[rowIndex][colIndex]}
                         </div>

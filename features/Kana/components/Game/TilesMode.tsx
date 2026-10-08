@@ -34,6 +34,7 @@ import {
 import TilesModeGrid from '@/shared/ui-composite/Game/TilesModeGrid';
 import useClassicSessionStore from '@/shared/store/useClassicSessionStore';
 import { useTilesModeKeyboardSelection } from '@/shared/hooks/game/useTilesModeKeyboardSelection';
+import { useKanaAnswerAudio } from '@/features/Kana/hooks/useKanaAnswerAudio';
 
 const random = new Random();
 const adaptiveSelector = getGlobalAdaptiveSelector();
@@ -103,6 +104,7 @@ const KanaTilesMode = ({
     resetAnswerTimer,
   } = useAnswerTimer();
   const { playCorrect } = useCorrect();
+  const playAnswerAudio = useKanaAnswerAudio();
   const { playErrorTwice } = useError();
   const { playClick } = useClick();
   const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
@@ -296,6 +298,7 @@ const KanaTilesMode = ({
     if (!hasInitializedResetRef.current) {
       hasInitializedResetRef.current = true;
       previousWordLengthRef.current = wordLength;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       resetGame();
       return;
     }
@@ -351,6 +354,7 @@ const KanaTilesMode = ({
       resetAnswerTimer();
 
       playCorrect();
+      playAnswerAudio(isReverse ? wordData.answerChars : wordData.wordChars);
       triggerCrazyMode();
       resetWrongStreak();
 
@@ -437,6 +441,7 @@ const KanaTilesMode = ({
     wordData,
     playClick,
     playCorrect,
+    playAnswerAudio,
     playErrorTwice,
     triggerCrazyMode,
     resetWrongStreak,
