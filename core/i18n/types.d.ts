@@ -1835,6 +1835,7 @@ export interface GrammarTranslations {
     breakdown: string;
     examples: string;
     pronunciation: string;
+    playAudio: string;
     pronunciationGuide: string;
     pronunciationLegend: string;
     mnemonic: string;
