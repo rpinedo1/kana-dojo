@@ -124,7 +124,8 @@ const isAnalyticsEnabled =
 
 const isAdSenseEnabled =
   process.env.NODE_ENV === 'production' &&
-  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' &&
+  process.env.ANALYTICS_DISABLED !== 'true';
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;

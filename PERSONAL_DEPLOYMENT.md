@@ -12,7 +12,7 @@ This public AGPL-3.0 fork preserves KanaDojo attribution and license. It uses a 
 
 ## Environment
 
-Set `ANALYTICS_DISABLED=true` in Production, Preview, and Development. Set `SITE_URL` to the production origin once assigned for sitemap generation. Do not configure upstream analytics keys.
+Set `ANALYTICS_DISABLED=true` in Production, Preview, and Development. Set `SITE_URL` to the production origin once assigned for sitemap generation. Do not configure upstream analytics keys. This setting also disables upstream AdSense scripts in this fork.
 
 Sentry is disabled unless `NEXT_PUBLIC_SENTRY_DSN` is explicitly supplied for your own project. Default PII collection and Sentry build telemetry are off. The footer source link points to this fork; upstream credits remain intact. No Sentry auth token is needed for this deployment. Never commit credentials.
 
@@ -56,3 +56,17 @@ Inspect Vercel build/runtime logs. Confirm production branch `deploy`, correct G
 ## Rollback
 
 In Vercel Deployments, select a verified working production deployment and use rollback. Test the production alias afterward. Rollback does not revert environment variables or Git. Correct environment values separately, and revert the bad commit on `deploy` before the next push. Vercel rollback can pause automatic production assignment; promote the next verified deployment to restore normal releases.
+
+## Verification (2026-10-08)
+
+- `npm ci` completed with Node 24.19 and npm 11.9.
+- `npm run check`: passed, zero errors; 482 existing warnings.
+- Scroll-restoration regression tests: 6 passed. Build-ignore regression tests passed.
+- Local production build attempted but failed downloading Google font assets. Actual Vercel production builds succeeded with those fonts.
+- Git push automatically created a Ready production deployment.
+- Live homepage, dojo navigation, Hiragana Pick, Katakana Type, Kanji Pick, Vocabulary Pick, answer feedback, scoring, and completed-session summary tested.
+- Completed-session statistics, character progress, and achievements remained after reload.
+- Public `/api/healthcheck`: HTTP 200, status ok. Vercel runtime logs during testing showed zero Error/Fatal entries; optional PostHog configuration warnings remain.
+- Desktop tested. iPhone-size emulation could not run because the testing browser download returned an invalid archive; physical iPhone/Safari remains unverified.
+- Blitz, Gauntlet, reverse variants, every JLPT level, audio output, and optional external-service features were not exhaustively tested.
+- Existing achievement criteria can award N5 Graduate after a single Level 1 answer; this upstream behavior was observed and left unchanged.
