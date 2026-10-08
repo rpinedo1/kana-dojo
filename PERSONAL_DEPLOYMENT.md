@@ -8,13 +8,13 @@ This public AGPL-3.0 fork preserves KanaDojo attribution and license. It uses a 
 - `deploy`: production branch, with automatic Vercel Git deployments.
 - Project: `kana-dojo`; repository root; Next.js preset; Node.js 24.x; npm lockfile.
 - Preserve `vercel.json` settings except the removed frequent Cron array. Build: `npm run clean:all && npm run build`. Ignore step: `bash scripts/vercel-ignore.sh`.
-- The production URL is the default `.vercel.app` alias shown in the Vercel project dashboard. Deployment is not complete until its Ready status and functional checks are verified.
+- Production URL: https://kana-dojo-orpin.vercel.app. Deployment is not complete until its Ready status and functional checks are verified.
 
 ## Environment
 
 Set `ANALYTICS_DISABLED=true` in Production, Preview, and Development. Set `SITE_URL` to the production origin once assigned for sitemap generation. Do not configure upstream analytics keys.
 
-Sentry is disabled unless `NEXT_PUBLIC_SENTRY_DSN` is explicitly supplied for your own project. Default PII collection is off. No Sentry auth token is needed for this deployment. Never commit credentials.
+Sentry is disabled unless `NEXT_PUBLIC_SENTRY_DSN` is explicitly supplied for your own project. Default PII collection and Sentry build telemetry are off. The footer source link points to this fork; upstream credits remain intact. No Sentry auth token is needed for this deployment. Never commit credentials.
 
 Core kana, kanji, vocabulary, training, and browser-local progress do not need service credentials. Cloud translation requires a configured translation provider (Google/Azure/AWS); automated bug reports require Supabase/Tally/DeepSeek/GitHub configuration. Leave those services unconfigured for this version. Wallpapers may use upstream public assets.
 

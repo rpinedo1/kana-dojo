@@ -45,7 +45,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     icon: faGithub,
-    url: 'https://github.com/lingdojo/kana-dojo',
+    url: 'https://github.com/rpinedo1/kana-dojo',
     type: 'fontawesome',
   },
   {
